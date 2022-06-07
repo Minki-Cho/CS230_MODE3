@@ -24,8 +24,7 @@ void Arena::Unload()
 
 void Arena::Draw()
 {
-	//texturePtr->Draw(math::TranslateMatrix(Engine::GetWindow().GetSize() / 2));
-	texturePtr->Draw(math::TranslateMatrix(math::vec2{}));
+	texturePtr->Draw(math::TranslateMatrix((Engine::GetWindow().GetSize() - texturePtr->GetSize()) / 2));
 }
 
 math::ivec2 Arena::Size()

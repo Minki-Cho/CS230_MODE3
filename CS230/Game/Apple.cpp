@@ -37,7 +37,7 @@ void Apple::ResolveCollision(GameObject* objectB)
 		RemoveGOComponent<CS230::Collision>();
 		RemoveGOComponent<CS230::Sprite>();
 		SetDestroyed(true);
-		Engine::GetGSComponent<CS230::GameObjectManager>()->Add(new Apple());
+		Engine::GetGSComponent<CS230::GameObjectManager>()->Add(new Apple);
 	}
 }
 

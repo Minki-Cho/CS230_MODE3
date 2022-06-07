@@ -17,8 +17,8 @@ Creation date: 6/7/2022
 #include "Arena.h" //Map Collision
 #include "Car_Anim.h"
 BumperCar::BumperCar(math::vec2 startPos)
-	: GameObject(startPos), rotateCounterKey(CS230::InputKey::Keyboard::A), rotateClockKey(CS230::InputKey::Keyboard::D), isDead(false),
-	light{ "Assets/Final/car_light.spt",this}, velocity(200)
+	: GameObject(startPos,0,math::vec2{0.5,0.5}), rotateCounterKey(CS230::InputKey::Keyboard::A), rotateClockKey(CS230::InputKey::Keyboard::D), isDead(false),
+	light{ "Assets/Final/car_light.spt",this}, velocity(400)
 {
 	AddGOComponent(new CS230::Sprite("Assets/Final/bumper_car.spt", this));
 	GetGOComponent<CS230::Sprite>()->PlayAnimation(static_cast<int>(Car_Anim::None_Anim));
@@ -26,7 +26,14 @@ BumperCar::BumperCar(math::vec2 startPos)
 
 void BumperCar::Update(double dt)
 {
-
+	//map collision
+	if (GetPosition().x < -Engine::GetGSComponent<Arena>()->Size().x / 2 ||
+		GetPosition().x > Engine::GetGSComponent<Arena>()->Size().x / 2 ||
+		GetPosition().y < -Engine::GetGSComponent<Arena>()->Size().y / 2 ||
+		GetPosition().y > Engine::GetGSComponent<Arena>()->Size().y / 2)
+	{
+		isDead = true;
+	}
 
 	if (isDead == false)
 	{
@@ -85,7 +92,7 @@ void BumperCar::ResolveCollision(CS230::GameObject* objectB)
 	if (objectB->GetObjectType() == GameObjectType::Apple)
 	{
 		velocity += increase_val;
-		//Engine::GetGameStateManager().GetGSComponent<Score>()->AddScore(100);
-
+		Engine::GetGameStateManager().GetGSComponent<Score>()->AddScore(100);
+		objectB->ResolveCollision(this);
 	}
 }
