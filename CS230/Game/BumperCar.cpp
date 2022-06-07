@@ -19,7 +19,6 @@ BumperCar::BumperCar(math::vec2 startPos)
 	light{ "Assets/Final/car_light.spt",this}
 {
 	AddGOComponent(new CS230::Sprite("Assets/Final/bumper_car.spt", this));
-	SetVelocity(math::vec2{ 0,velocity });
 	//GetGOComponent<CS230::Sprite>()->PlayAnimation(static_cast<int>(Ship_Anim::None_Anim));
 }
 
@@ -35,6 +34,7 @@ void BumperCar::Update(double dt)
 		{
 			UpdateRotation(-(rotate_speed * dt));
 		}
+		SetVelocity(math::RotateMatrix(GetRotation()) * math::vec2{ 0,velocity / 2 });
 	}
 	UpdatePosition(GetVelocity() * dt);
 	UpdateGOComponents(dt);
@@ -42,6 +42,10 @@ void BumperCar::Update(double dt)
 
 void BumperCar::Draw(math::TransformMatrix cameraMatrix)
 {
+	if (isDead == false)
+	{
+		light.Draw(cameraMatrix * GetMatrix() * math::TranslateMatrix(GetGOComponent<CS230::Sprite>()->GetHotSpot(1)));
+	}
 	GetGOComponent<CS230::Sprite>()->Draw(cameraMatrix * GetMatrix());
 	if (Engine::GetGSComponent<ShowCollision>() != nullptr)
 	{
