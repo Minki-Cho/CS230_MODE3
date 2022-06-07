@@ -1,0 +1,8 @@
+assets/Final/bumper_Car.png
+HotSpot 50 41
+HotSpot 0 45
+FrameSize 90 90
+NumFrames 6
+CollisionCircle 45 
+Anim assets/Final/none.anm
+Anim assets/Final/disappear.anm
