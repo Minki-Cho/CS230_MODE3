@@ -3,11 +3,11 @@
 #include "../Engine/Collision.h" //removeCollision
 #include "Score.h" //Add Score
 #include "../Engine/Engine.h" //GetGameStateManager
-Apple::Apple() : GameObject({ 0,0 })
+Apple::Apple() : GameObject({ 0,0 }), random_val({0,0})
 {
+	random_val = { random_helper(400.0, 1000.0),random_helper(160.0, 760.0) };
 	AddGOComponent(new CS230::Sprite("Assets/Final/apple.spt", this));
-	
-	SetPosition(math::vec2{ random_helper(400.0, 1000.0) ,random_helper(160.0, 760.0) });
+	SetPosition(math::vec2{ random_val.x ,random_val.y });
 }
 
 GameObjectType Apple::GetObjectType()
@@ -20,16 +20,26 @@ std::string Apple::GetObjectTypeName()
 	return "Apple";
 }
 
+bool Apple::CanCollideWith(GameObjectType objectBType)
+{
+	if (objectBType == GameObjectType::BumperCar)
+	{
+		return true;
+	}
+	return false;
+}
+
 void Apple::ResolveCollision(GameObject* objectB)
 {
-	if (objectB->GetObjectType() == GameObjectType::Apple)
+	if (objectB->GetObjectType() == GameObjectType::BumperCar)
 	{
-		Engine::GetGameStateManager().GetGSComponent<Score>()->AddScore(100);
 		RemoveGOComponent<CS230::Collision>();
 		RemoveGOComponent<CS230::Sprite>();
-		//Isdead = true;
+		Engine::GetGameStateManager().GetGSComponent<Score>()->AddScore(100);
+		// remove itself
+		//random_val = { random_helper(400.0, 1000.0),random_helper(160.0, 760.0) };
+		/*Engine::GetGameStateManager().GetGSComponent<CS230::Sprite>().*/
 		AddGOComponent(new CS230::Sprite("Assets/Final/apple.spt", this));
-		SetPosition(math::vec2{ static_cast<double>(rand() % 700),static_cast<double>(rand() % 700) });
 	}
 }
 

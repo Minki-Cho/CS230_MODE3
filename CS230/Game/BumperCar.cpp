@@ -13,6 +13,7 @@ Creation date: 6/7/2022
 #include "../Engine/ShowCollision.h" //GetGSComponent
 #include "GameObjectTypes.h" //return GameObjectTypes
 #include "../Engine/GameObjectManager.h" //Get GameObjectManager
+//#include "Score.h" //Add Score
 
 BumperCar::BumperCar(math::vec2 startPos)
 	: GameObject(startPos), rotateCounterKey(CS230::InputKey::Keyboard::A), rotateClockKey(CS230::InputKey::Keyboard::D), isDead(false),
@@ -69,7 +70,7 @@ std::string BumperCar::GetObjectTypeName()
 
 bool BumperCar::CanCollideWith(GameObjectType objectBType)
 {
-	if (objectBType == GameObjectType::Meteor || objectBType == GameObjectType::EnemyShip)
+	if (objectBType == GameObjectType::Apple)
 	{
 		return true;
 	}
@@ -78,10 +79,9 @@ bool BumperCar::CanCollideWith(GameObjectType objectBType)
 
 void BumperCar::ResolveCollision(CS230::GameObject* objectB)
 {
-	if (objectB->GetObjectType() == GameObjectType::Meteor || objectB->GetObjectType() == GameObjectType::EnemyShip)
+	if (objectB->GetObjectType() == GameObjectType::Apple)
 	{
-		isDead = true;
-		//GetGOComponent<CS230::Sprite>()->PlayAnimation(static_cast<int>(Ship_Anim::Explode_Anim));
-		RemoveGOComponent<CS230::Collision>();
+		//Engine::GetGameStateManager().GetGSComponent<Score>()->AddScore(100);
+
 	}
 }

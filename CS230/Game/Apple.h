@@ -20,9 +20,11 @@ public:
 
 	GameObjectType GetObjectType() override;
 	std::string GetObjectTypeName() override;
+	bool CanCollideWith(GameObjectType objectBType) override;
 	void ResolveCollision(GameObject* objectB) override;
 	void Update(double dt) override;
 private:
 	//bool Isdead;
 	double random_helper(double min, double max){return min + rand() / (RAND_MAX / (max - min));}
+	math::vec2 random_val;
 };
