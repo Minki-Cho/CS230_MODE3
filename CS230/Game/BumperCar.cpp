@@ -27,14 +27,13 @@ BumperCar::BumperCar(math::vec2 startPos)
 void BumperCar::Update(double dt)
 {
 	//map collision
-	if (GetPosition().x < -Engine::GetGSComponent<Arena>()->Size().x / 2 ||
-		GetPosition().x > Engine::GetGSComponent<Arena>()->Size().x / 2 ||
-		GetPosition().y < -Engine::GetGSComponent<Arena>()->Size().y / 2 ||
-		GetPosition().y > Engine::GetGSComponent<Arena>()->Size().y / 2)
+	if (GetPosition().x < (Engine::GetWindow().GetSize().x - Engine::GetGSComponent<Arena>()->Size().x) / 2 ||
+		GetPosition().x > (Engine::GetWindow().GetSize().x + Engine::GetGSComponent<Arena>()->Size().x) / 2 ||
+		GetPosition().y < (Engine::GetWindow().GetSize().y -Engine::GetGSComponent<Arena>()->Size().y) / 2 ||
+		GetPosition().y > (Engine::GetWindow().GetSize().y + Engine::GetGSComponent<Arena>()->Size().y) / 2)
 	{
 		isDead = true;
 	}
-
 	if (isDead == false)
 	{
 		if (rotateCounterKey.IsKeyDown())
@@ -56,6 +55,10 @@ void BumperCar::Draw(math::TransformMatrix cameraMatrix)
 	if (isDead == false)
 	{
 		light.Draw(cameraMatrix * GetMatrix() * math::TranslateMatrix(GetGOComponent<CS230::Sprite>()->GetHotSpot(1)));
+	}
+	else if (isDead == true)
+	{
+		GetGOComponent<CS230::Sprite>()->PlayAnimation(static_cast<int>(Car_Anim::Car_Anim));
 	}
 	GetGOComponent<CS230::Sprite>()->Draw(cameraMatrix * GetMatrix());
 	if (Engine::GetGSComponent<ShowCollision>() != nullptr)
