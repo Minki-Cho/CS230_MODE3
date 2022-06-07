@@ -84,6 +84,7 @@ void BumperCar::ResolveCollision(CS230::GameObject* objectB)
 {
 	if (objectB->GetObjectType() == GameObjectType::Apple)
 	{
+		velocity += increase_val;
 		//Engine::GetGameStateManager().GetGSComponent<Score>()->AddScore(100);
 
 	}
