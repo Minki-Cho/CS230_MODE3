@@ -14,5 +14,6 @@ enum class GameObjectType
     Particle,
     EnemyShip,
     BumperCar,
+    Apple,
     Count,
 };

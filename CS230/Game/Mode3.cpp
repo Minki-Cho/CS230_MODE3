@@ -17,6 +17,7 @@ Creation date: 6/7/2022
 #include "../Engine/ShowCollision.h" //collision
 #include "GameParticles.h" //HitEmitter, MeteorBitEmitter
 #include "Arena.h" //EnemyShip
+#include "Apple.h"
 
 Mode3::Mode3() : gameObjectManagerPtr(nullptr), bumpercarPtr(nullptr),
 #ifdef _DEBUG
@@ -38,6 +39,7 @@ void Mode3::Load()
 	gameObjectManagerPtr = new CS230::GameObjectManager();
 	bumpercarPtr = new BumperCar(math::vec2{ Engine::GetWindow().GetSize().x / 2.0, Engine::GetWindow().GetSize().y / 2.0 });
 	gameObjectManagerPtr->Add(bumpercarPtr);
+	gameObjectManagerPtr->Add(new Apple());
 	AddGSComponent(gameObjectManagerPtr);
 	AddGSComponent(new Arena{ "Assets/Final/map.png" });
 
