@@ -1,5 +1,3 @@
 assets/Final/car_light.png
-FrameSize 29 60
-HotSpot 0 27
-NumFrames 2
-Anim assets/Final/none.anm
+FrameSize 60 29
+HotSpot 27 0
