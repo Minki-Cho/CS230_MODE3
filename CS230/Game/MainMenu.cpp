@@ -58,6 +58,9 @@ void MainMenu::Update(double)
 			Engine::GetGameStateManager().SetNextState(static_cast<int>(Screens::Mode2));
 			break;
 		case 2:
+			Engine::GetGameStateManager().SetNextState(static_cast<int>(Screens::Mode3));
+			break;
+		case 3:
 			Engine::GetGameStateManager().Shutdown();
 			break;
 		}
@@ -88,5 +91,6 @@ MainMenu::OptionData MainMenu::optionsData[static_cast<int>(MainMenu::Options::C
 {
 	{"Side Scroller", {0.5, 0.45}, {} },
 	{"Space Shooter", {0.5, 0.35}, {} },
-	{"Quit", {0.5, 0.25}, {} },
-};
+	{"Apple Collector", {0.5, 0.25}, {} },
+	{"Quit", {0.5, 0.15}, {} },
+};	

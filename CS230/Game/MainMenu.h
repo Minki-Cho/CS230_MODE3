@@ -21,6 +21,7 @@ public:
 	{
 		Mode1,
 		Mode2,
+		Mode3,
 		Quit,
 		Count,
 	};
