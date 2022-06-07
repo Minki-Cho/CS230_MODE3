@@ -39,7 +39,7 @@ void Mode3::Load()
 	bumpercarPtr = new BumperCar(math::vec2{ Engine::GetWindow().GetSize().x / 2.0, Engine::GetWindow().GetSize().y / 2.0 });
 	gameObjectManagerPtr->Add(bumpercarPtr);
 	AddGSComponent(gameObjectManagerPtr);
-	AddGSComponent(new Arena{ "Assets/foreground.png" });
+	AddGSComponent(new Arena{ "Assets/Final/map.png" });
 
 	//Emitters
 	//AddGSComponent(new HitEmitter());

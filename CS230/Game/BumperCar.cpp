@@ -15,9 +15,10 @@ Creation date: 6/7/2022
 #include "../Engine/GameObjectManager.h" //Get GameObjectManager
 
 BumperCar::BumperCar(math::vec2 startPos)
-	: GameObject(startPos), rotateCounterKey(CS230::InputKey::Keyboard::A), rotateClockKey(CS230::InputKey::Keyboard::D), isDead(false)
+	: GameObject(startPos), rotateCounterKey(CS230::InputKey::Keyboard::A), rotateClockKey(CS230::InputKey::Keyboard::D), isDead(false),
+	light{ "Assets/Final/car_light.spt",this}
 {
-	AddGOComponent(new CS230::Sprite("Assets/Ship.spt", this));
+	AddGOComponent(new CS230::Sprite("Assets/Final/bumper_car.spt", this));
 	SetVelocity(math::vec2{ 0,velocity });
 	//GetGOComponent<CS230::Sprite>()->PlayAnimation(static_cast<int>(Ship_Anim::None_Anim));
 }
@@ -35,7 +36,6 @@ void BumperCar::Update(double dt)
 			UpdateRotation(-(rotate_speed * dt));
 		}
 	}
-
 	UpdatePosition(GetVelocity() * dt);
 	UpdateGOComponents(dt);
 }

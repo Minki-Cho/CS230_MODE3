@@ -35,4 +35,5 @@ private:
     double rotate_speed{ 7 };
 
     bool isDead;
+    CS230::Sprite light;
 };
