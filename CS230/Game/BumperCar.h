@@ -27,7 +27,8 @@ public:
 
     bool IsDead() { return isDead; }
 private:
-    static constexpr double velocity{ 400 };
+    double velocity;
+    static constexpr double increase_val{ 80 };
 
     CS230::InputKey rotateCounterKey;
     CS230::InputKey rotateClockKey;

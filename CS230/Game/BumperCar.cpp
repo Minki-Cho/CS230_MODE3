@@ -17,7 +17,7 @@ Creation date: 6/7/2022
 
 BumperCar::BumperCar(math::vec2 startPos)
 	: GameObject(startPos), rotateCounterKey(CS230::InputKey::Keyboard::A), rotateClockKey(CS230::InputKey::Keyboard::D), isDead(false),
-	light{ "Assets/Final/car_light.spt",this}
+	light{ "Assets/Final/car_light.spt",this}, velocity(200)
 {
 	AddGOComponent(new CS230::Sprite("Assets/Final/bumper_car.spt", this));
 	//GetGOComponent<CS230::Sprite>()->PlayAnimation(static_cast<int>(Ship_Anim::None_Anim));
@@ -81,7 +81,6 @@ void BumperCar::ResolveCollision(CS230::GameObject* objectB)
 {
 	if (objectB->GetObjectType() == GameObjectType::Apple)
 	{
-		//Engine::GetGameStateManager().GetGSComponent<Score>()->AddScore(100);
-
+		velocity += increase_val;
 	}
 }

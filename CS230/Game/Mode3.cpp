@@ -80,7 +80,7 @@ void Mode3::Update(double dt)
 
 void Mode3::Draw()
 {
-	Engine::GetWindow().Clear(0x000000FF);
+	Engine::GetWindow().Clear(0x97CAFF);
 	GetGSComponent<Arena>()->Draw();
 
 	GetGSComponent<CS230::GameObjectManager>()->DrawAll(cameraMatrix);
