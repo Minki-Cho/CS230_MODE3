@@ -36,9 +36,6 @@ void Apple::ResolveCollision(GameObject* objectB)
 	{
 		RemoveGOComponent<CS230::Collision>();
 		RemoveGOComponent<CS230::Sprite>();
-		Engine::GetGameStateManager().GetGSComponent<Score>()->AddScore(100);
-		// remove itself
-		//random_val = { random_helper(400.0, 1000.0),random_helper(160.0, 760.0) };
 		SetDestroyed(true);
 		Engine::GetGSComponent<CS230::GameObjectManager>()->Add(new Apple());
 	}

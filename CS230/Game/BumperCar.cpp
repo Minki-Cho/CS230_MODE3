@@ -13,7 +13,8 @@ Creation date: 6/7/2022
 #include "../Engine/ShowCollision.h" //GetGSComponent
 #include "GameObjectTypes.h" //return GameObjectTypes
 #include "../Engine/GameObjectManager.h" //Get GameObjectManager
-//#include "Score.h" //Add Score
+#include "Score.h" //Add Score
+#include "Arena.h" //Map Collision
 
 BumperCar::BumperCar(math::vec2 startPos)
 	: GameObject(startPos), rotateCounterKey(CS230::InputKey::Keyboard::A), rotateClockKey(CS230::InputKey::Keyboard::D), isDead(false),
@@ -25,6 +26,8 @@ BumperCar::BumperCar(math::vec2 startPos)
 
 void BumperCar::Update(double dt)
 {
+
+
 	if (isDead == false)
 	{
 		if (rotateCounterKey.IsKeyDown())
@@ -81,6 +84,7 @@ void BumperCar::ResolveCollision(CS230::GameObject* objectB)
 {
 	if (objectB->GetObjectType() == GameObjectType::Apple)
 	{
-		velocity += increase_val;
+		//Engine::GetGameStateManager().GetGSComponent<Score>()->AddScore(100);
+
 	}
 }
