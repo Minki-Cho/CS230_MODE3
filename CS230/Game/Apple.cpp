@@ -3,6 +3,7 @@
 #include "../Engine/Collision.h" //removeCollision
 #include "Score.h" //Add Score
 #include "../Engine/Engine.h" //GetGameStateManager
+#include "../Engine/GameObjectManager.h"
 Apple::Apple() : GameObject({ 0,0 }), random_val({0,0})
 {
 	random_val = { random_helper(400.0, 1000.0),random_helper(160.0, 760.0) };
@@ -38,8 +39,8 @@ void Apple::ResolveCollision(GameObject* objectB)
 		Engine::GetGameStateManager().GetGSComponent<Score>()->AddScore(100);
 		// remove itself
 		//random_val = { random_helper(400.0, 1000.0),random_helper(160.0, 760.0) };
-		/*Engine::GetGameStateManager().GetGSComponent<CS230::Sprite>().*/
-		AddGOComponent(new CS230::Sprite("Assets/Final/apple.spt", this));
+		SetDestroyed(true);
+		Engine::GetGSComponent<CS230::GameObjectManager>()->Add(new Apple());
 	}
 }
 
