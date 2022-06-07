@@ -58,7 +58,7 @@ void BumperCar::Draw(math::TransformMatrix cameraMatrix)
 	}
 	else if (isDead == true)
 	{
-		GetGOComponent<CS230::Sprite>()->PlayAnimation(static_cast<int>(Car_Anim::Car_Anim));
+		GetGOComponent<CS230::Sprite>()->PlayAnimation(static_cast<int>(Car_Anim::Dissapear_Anim));
 	}
 	GetGOComponent<CS230::Sprite>()->Draw(cameraMatrix * GetMatrix());
 	if (Engine::GetGSComponent<ShowCollision>() != nullptr)
