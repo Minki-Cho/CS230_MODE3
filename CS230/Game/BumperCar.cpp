@@ -15,13 +15,13 @@ Creation date: 6/7/2022
 #include "../Engine/GameObjectManager.h" //Get GameObjectManager
 #include "Score.h" //Add Score
 #include "Arena.h" //Map Collision
-
+#include "Car_Anim.h"
 BumperCar::BumperCar(math::vec2 startPos)
 	: GameObject(startPos), rotateCounterKey(CS230::InputKey::Keyboard::A), rotateClockKey(CS230::InputKey::Keyboard::D), isDead(false),
 	light{ "Assets/Final/car_light.spt",this}, velocity(200)
 {
 	AddGOComponent(new CS230::Sprite("Assets/Final/bumper_car.spt", this));
-	//GetGOComponent<CS230::Sprite>()->PlayAnimation(static_cast<int>(Ship_Anim::None_Anim));
+	GetGOComponent<CS230::Sprite>()->PlayAnimation(static_cast<int>(Car_Anim::None_Anim));
 }
 
 void BumperCar::Update(double dt)

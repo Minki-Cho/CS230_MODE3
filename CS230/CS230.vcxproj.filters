@@ -300,6 +300,9 @@
     <ClInclude Include="Game\Apple.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Car_Anim.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Vec2.inl">
