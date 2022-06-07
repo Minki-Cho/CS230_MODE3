@@ -13,5 +13,6 @@ enum class GameObjectType
     Laser,
     Particle,
     EnemyShip,
+    BumperCar,
     Count,
 };
