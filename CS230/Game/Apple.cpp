@@ -6,7 +6,8 @@
 Apple::Apple() : GameObject({ 0,0 })
 {
 	AddGOComponent(new CS230::Sprite("Assets/Final/apple.spt", this));
-	SetPosition(math::vec2{ static_cast<double>(rand() % 700),static_cast<double>(rand() % 700) });
+	
+	SetPosition(math::vec2{ random_helper(400.0, 1000.0) ,random_helper(160.0, 760.0) });
 }
 
 GameObjectType Apple::GetObjectType()

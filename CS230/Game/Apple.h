@@ -24,4 +24,5 @@ public:
 	void Update(double dt) override;
 private:
 	//bool Isdead;
+	double random_helper(double min, double max){return min + rand() / (RAND_MAX / (max - min));}
 };
