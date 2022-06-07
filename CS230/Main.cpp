@@ -14,6 +14,7 @@ Creation date: 2/10/2021
 #include "Game/Splash.h" //splash
 #include "Game/Mode1.h" //mode1
 #include "Game/Mode2.h" //mode2
+#include "Game/Mode3.h" //mode3
 #include "Game/MainMenu.h" //menu
 
 
@@ -26,6 +27,7 @@ int main(void)
 		Splash splash;
 		Mode1 mode1;
 		Mode2 mode2;
+		Mode3 mode3;
 		MainMenu menu;
 
 		engine.AddSpriteFont("assets/font.png");
@@ -34,6 +36,7 @@ int main(void)
 		engine.GetGameStateManager().AddGameState(menu);
 		engine.GetGameStateManager().AddGameState(mode1);
 		engine.GetGameStateManager().AddGameState(mode2);
+		engine.GetGameStateManager().AddGameState(mode3);
 
 		while (engine.HasGameEnded() == false)
 		{
