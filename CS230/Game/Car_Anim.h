@@ -3,5 +3,5 @@
 enum class Car_Anim
 {
     None_Anim,
-    Car_Anim,
+    Disappear_Anim,
 };
