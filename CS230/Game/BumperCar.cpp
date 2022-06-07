@@ -18,7 +18,7 @@ Creation date: 6/7/2022
 #include "Car_Anim.h"
 BumperCar::BumperCar(math::vec2 startPos)
 	: GameObject(startPos,0,math::vec2{0.5,0.5}), rotateCounterKey(CS230::InputKey::Keyboard::A), rotateClockKey(CS230::InputKey::Keyboard::D), isDead(false),
-	light{ "Assets/Final/car_light.spt",this}, velocity(400)
+	light{ "Assets/Final/car_light.spt",this}, velocity(400), isOut(false)
 {
 	AddGOComponent(new CS230::Sprite("Assets/Final/bumper_car.spt", this));
 	GetGOComponent<CS230::Sprite>()->PlayAnimation(static_cast<int>(Car_Anim::None_Anim));
@@ -32,8 +32,20 @@ void BumperCar::Update(double dt)
 		GetPosition().y < (Engine::GetWindow().GetSize().y -Engine::GetGSComponent<Arena>()->Size().y) / 2 ||
 		GetPosition().y > (Engine::GetWindow().GetSize().y + Engine::GetGSComponent<Arena>()->Size().y) / 2)
 	{
-		isDead = true;
+		if (isDead == false)
+		{
+			isOut = true;
+			isDead = true;
+		}
 	}
+
+	if (isOut == true && isDead == true)
+	{
+		GetGOComponent<CS230::Sprite>()->PlayAnimation(static_cast<int>(Car_Anim::Disappear_Anim));
+		isOut = false;
+	}
+
+	//rotate
 	if (isDead == false)
 	{
 		if (rotateCounterKey.IsKeyDown())
@@ -56,10 +68,7 @@ void BumperCar::Draw(math::TransformMatrix cameraMatrix)
 	{
 		light.Draw(cameraMatrix * GetMatrix() * math::TranslateMatrix(GetGOComponent<CS230::Sprite>()->GetHotSpot(1)));
 	}
-	else if (isDead == true)
-	{
-		GetGOComponent<CS230::Sprite>()->PlayAnimation(static_cast<int>(Car_Anim::Dissapear_Anim));
-	}
+
 	GetGOComponent<CS230::Sprite>()->Draw(cameraMatrix * GetMatrix());
 	if (Engine::GetGSComponent<ShowCollision>() != nullptr)
 	{

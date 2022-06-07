@@ -1,7 +1,7 @@
-PlayFrame 1 .08
-PlayFrame 2 .08
-PlayFrame 3 .08
-PlayFrame 4 .08
-PlayFrame 5 .08
-PlayFrame 6 .08
+PlayFrame 1 .05
+PlayFrame 2 .05
+PlayFrame 3 .05
+PlayFrame 4 .05
+PlayFrame 5 .05
+PlayFrame 6 .05
 Loop 5

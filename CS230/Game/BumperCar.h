@@ -38,4 +38,5 @@ private:
     double rotate_speed{ 7 };
 
     bool isDead;
+    bool isOut;
 };
