@@ -16,7 +16,7 @@ public:
 private:
     GameObject* player;
 
-    static constexpr double accel = 200;
+    static constexpr double accel = 50;
     static constexpr double drag = 1;
     static constexpr double rotationRate = 3;
 

@@ -8,10 +8,10 @@
 
 EnemyCar::EnemyCar(GameObject* player) : player(player), GameObject(math::vec2{}, 0, math::vec2{ 0.75,0.75 })
 {
-	//AddGOComponent(new CS230::Sprite("Assets/enemyShip.spt", this));
+	AddGOComponent(new CS230::Sprite("Assets/Final/slasher.spt", this));
 	SetRotation(GetRandom(0, 2 * PI));
-	SetPosition(math::vec2{ GetRandom(player->GetPosition().x - 1024, player->GetPosition().x - 2048),
-		GetRandom(player->GetPosition().y, player->GetPosition().y) });
+	SetPosition(math::vec2{ GetRandom(player->GetPosition().x, player->GetPosition().x),
+	GetRandom(player->GetPosition().y, player->GetPosition().y) });
 }
 
 void EnemyCar::Update(double dt)
