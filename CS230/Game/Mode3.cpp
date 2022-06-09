@@ -46,8 +46,8 @@ void Mode3::Load()
 	AddGSComponent(new Arena{ "Assets/Final/map.png" });
 
 	//Emitters
-	//AddGSComponent(new HitEmitter());
-	//AddGSComponent(new MeteorBitEmitter());
+	AddGSComponent(new HitEmitter());
+	AddGSComponent(new MeteorBitEmitter());
 
 #ifdef _DEBUG
 	//collision

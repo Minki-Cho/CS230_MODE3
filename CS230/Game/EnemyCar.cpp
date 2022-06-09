@@ -5,6 +5,7 @@
 #include "Flame_Anims.h" //Flame Animation
 #include "GameObjectTypes.h" //GameObjectTypes
 #include "EnemyCar_Anim.h" //Car Animation
+#include "GameParticles.h"
 
 EnemyCar::EnemyCar(GameObject* player) : player(player), GameObject(math::vec2{}, 0, math::vec2{ 0.75,0.75 })
 {
@@ -55,6 +56,16 @@ void EnemyCar::ResolveCollision(GameObject* collidedWith)
 {
 	if (collidedWith->GetObjectType() == GameObjectType::BumperCar)
 	{
+		//math::vec2 vectorToObject = collidedWith->GetPosition() - GetPosition();
+		//math::vec2 collisionPoint = vectorToObject.Normalize() * GetGOComponent<CS230::CircleCollision>()->GetRadius() + GetPosition();
+		//Engine::GetGameStateManager().GetGSComponent<HitEmitter>()->Emit(1, collisionPoint, GetVelocity(), math::vec2{ 0,0 }, 0);
+
+		math::vec2 vectorToObject = collidedWith->GetPosition() - GetPosition();
+		math::vec2 collisionPoint = vectorToObject.Normalize() * GetGOComponent<CS230::CircleCollision>()->GetRadius() + GetPosition();
+		math::vec2 laserVelocity = collidedWith->GetVelocity();
+		math::vec2 emitVector = vectorToObject.Normalize() * 2 + laserVelocity.Normalize();
+		Engine::GetGameStateManager().GetGSComponent<MeteorBitEmitter>()->Emit(10, collisionPoint, GetVelocity(), emitVector * 50, PI / 2);
+
 		RemoveGOComponent<CS230::Collision>();
 	}
 }

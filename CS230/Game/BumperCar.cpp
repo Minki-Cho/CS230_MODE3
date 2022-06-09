@@ -16,6 +16,7 @@ Creation date: 6/7/2022
 #include "Score.h" //Add Score
 #include "Arena.h" //Map Collision
 #include "Car_Anim.h" //Car Animation
+#include "GameParticles.h" //Emit
 
 BumperCar::BumperCar(math::vec2 startPos)
 	: GameObject(startPos,0,math::vec2{0.5,0.5}), rotateCounterKey(CS230::InputKey::Keyboard::A), rotateClockKey(CS230::InputKey::Keyboard::D), isDead(false),
