@@ -32,19 +32,6 @@ void EnemyCar::Update(double dt)
 	UpdateGOComponents(dt);
 }
 
-//void EnemyCar::Draw(math::TransformMatrix displayMatrix)
-//{
-//	GetGOComponent<CS230::Sprite>()->Draw(displayMatrix * GetMatrix());
-//	if (Engine::GetGSComponent<ShowCollision>() != nullptr)
-//	{
-//		if (Engine::GetGSComponent<ShowCollision>()->IsEnabled() == true)
-//		{
-//			if (GetGOComponent<CS230::Collision>() != nullptr)
-//				GetGOComponent<CS230::Collision>()->Draw(displayMatrix);
-//		}
-//	}
-//}
-
 GameObjectType EnemyCar::GetObjectType()
 {
 	return GameObjectType::EnemyCar;
@@ -68,7 +55,7 @@ void EnemyCar::ResolveCollision(GameObject* collidedWith)
 {
 	if (collidedWith->GetObjectType() == GameObjectType::BumperCar)
 	{
-		//RemoveGOComponent<CS230::Collision>();
+		RemoveGOComponent<CS230::Collision>();
 	}
 }
 

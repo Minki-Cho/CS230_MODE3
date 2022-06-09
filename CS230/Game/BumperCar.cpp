@@ -109,7 +109,7 @@ void BumperCar::ResolveCollision(CS230::GameObject* objectB)
 	}
 	if (objectB->GetObjectType() == GameObjectType::EnemyCar)
 	{
-		Engine::GetGameStateManager().GetGSComponent<Score>()->AddScore(100);
+		isDead = true;
 		objectB->ResolveCollision(this);
 	}
 }
