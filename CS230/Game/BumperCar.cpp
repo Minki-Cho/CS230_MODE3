@@ -92,7 +92,7 @@ std::string BumperCar::GetObjectTypeName()
 
 bool BumperCar::CanCollideWith(GameObjectType objectBType)
 {
-	if (objectBType == GameObjectType::Apple)
+	if (objectBType == GameObjectType::Apple || objectBType == GameObjectType::EnemyCar)
 	{
 		return true;
 	}
@@ -104,6 +104,11 @@ void BumperCar::ResolveCollision(CS230::GameObject* objectB)
 	if (objectB->GetObjectType() == GameObjectType::Apple)
 	{
 		velocity += increase_val;
+		Engine::GetGameStateManager().GetGSComponent<Score>()->AddScore(100);
+		objectB->ResolveCollision(this);
+	}
+	if (objectB->GetObjectType() == GameObjectType::EnemyCar)
+	{
 		Engine::GetGameStateManager().GetGSComponent<Score>()->AddScore(100);
 		objectB->ResolveCollision(this);
 	}
