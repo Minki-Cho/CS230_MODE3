@@ -15,7 +15,8 @@ Creation date: 6/7/2022
 #include "../Engine/GameObjectManager.h" //Get GameObjectManager
 #include "Score.h" //Add Score
 #include "Arena.h" //Map Collision
-#include "Car_Anim.h"
+#include "Car_Anim.h" //Car Animation
+
 BumperCar::BumperCar(math::vec2 startPos)
 	: GameObject(startPos,0,math::vec2{0.5,0.5}), rotateCounterKey(CS230::InputKey::Keyboard::A), rotateClockKey(CS230::InputKey::Keyboard::D), isDead(false),
 	light{ "Assets/Final/car_light.spt",this}, velocity(400), isOut(false)
@@ -110,6 +111,7 @@ void BumperCar::ResolveCollision(CS230::GameObject* objectB)
 	if (objectB->GetObjectType() == GameObjectType::EnemyCar)
 	{
 		isDead = true;
+		GetGOComponent<CS230::Sprite>()->PlayAnimation(static_cast<int>(Car_Anim::Disappear_Anim));
 		objectB->ResolveCollision(this);
 	}
 }
