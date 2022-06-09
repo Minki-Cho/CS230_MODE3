@@ -49,3 +49,16 @@ private:
     };
     static constexpr int NumParticles = 150;
 };
+
+class CarBitEmitter : public CS230::ParticleEmitter {
+public:
+    CarBitEmitter();
+private:
+    class CarBit : public CS230::ParticleEmitter::Particle {
+    public:
+        CarBit(std::string spriteFile) : CS230::ParticleEmitter::Particle(spriteFile) {}
+        GameObjectType GetObjectType() { return GameObjectType::Particle; }
+        std::string GetObjectTypeName() { return "Car Bit Particle"; }
+    };
+    static constexpr int NumParticles = 50;
+};

@@ -50,6 +50,7 @@ void Mode3::Load()
 	//Emitters
 	AddGSComponent(new HitEmitter());
 	AddGSComponent(new MeteorBitEmitter());
+	AddGSComponent(new CarBitEmitter());
 
 #ifdef _DEBUG
 	//collision

@@ -19,8 +19,7 @@ EnemyCar::EnemyCar(GameObject* player, EnemyCarType type) :player(player), posit
 changeDir(false), type(type)
 {
 	AddGOComponent(new CS230::Sprite("Assets/Final/slasher.spt", this));
-	SetRotation(GetRandom(0, 2 * PI));
-	SetPosition({ static_cast<double>(Engine::GetWindow().GetSize().x), static_cast<double>(Engine::GetWindow().GetSize().y + 50.0) });
+	SetPosition({ static_cast<double>(Engine::GetWindow().GetSize().x), static_cast<double>(Engine::GetWindow().GetSize().y - 50.0) });
 }
 
 void EnemyCar::Update(double dt)
@@ -92,9 +91,9 @@ void EnemyCar::ResolveCollision(GameObject* collidedWith)
 
 		math::vec2 vectorToObject = collidedWith->GetPosition() - GetPosition();
 		math::vec2 collisionPoint = vectorToObject.Normalize() * GetGOComponent<CS230::CircleCollision>()->GetRadius() + GetPosition();
-		math::vec2 laserVelocity = collidedWith->GetVelocity();
-		math::vec2 emitVector = vectorToObject.Normalize() * 2 + laserVelocity.Normalize();
-		Engine::GetGameStateManager().GetGSComponent<MeteorBitEmitter>()->Emit(10, collisionPoint, GetVelocity(), emitVector * 50, PI / 2);
+		math::vec2 Velocity = collidedWith->GetVelocity();
+		math::vec2 emitVector = vectorToObject.Normalize() * 10 + Velocity.Normalize();
+		Engine::GetGameStateManager().GetGSComponent<CarBitEmitter>()->Emit(20, collisionPoint, GetVelocity(), emitVector * 50, PI);
 
 		RemoveGOComponent<CS230::Collision>();
 	}
