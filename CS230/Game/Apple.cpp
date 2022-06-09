@@ -4,6 +4,8 @@
 #include "Score.h" //Add Score
 #include "../Engine/Engine.h" //GetGameStateManager
 #include "../Engine/GameObjectManager.h"
+#include "GameParticles.h"
+
 Apple::Apple() : GameObject({ 0,0 }), random_val({0,0})
 {
 	random_val = { random_helper(400.0, 1000.0),random_helper(160.0, 760.0) };
@@ -34,6 +36,14 @@ void Apple::ResolveCollision(GameObject* objectB)
 {
 	if (objectB->GetObjectType() == GameObjectType::BumperCar)
 	{
+		//Particle
+		math::vec2 vectorToObject = objectB->GetPosition() - GetPosition();
+		math::vec2 collisionPoint = vectorToObject.Normalize() * GetGOComponent<CS230::CircleCollision>()->GetRadius() + GetPosition();
+
+		math::vec2 laserVelocity = objectB->GetVelocity();
+		math::vec2 emitVector = vectorToObject.Normalize() * 2 + laserVelocity.Normalize();
+		Engine::GetGameStateManager().GetGSComponent<StarBitEmitter>()->Emit(10, collisionPoint, GetVelocity(), emitVector * 50, 3.141592 / 2);
+
 		RemoveGOComponent<CS230::Collision>();
 		RemoveGOComponent<CS230::Sprite>();
 		SetDestroyed(true);

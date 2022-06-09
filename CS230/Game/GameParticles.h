@@ -62,3 +62,16 @@ private:
     };
     static constexpr int NumParticles = 50;
 };
+
+class StarBitEmitter : public CS230::ParticleEmitter {
+public:
+    StarBitEmitter();
+private:
+    class StarBit : public CS230::ParticleEmitter::Particle {
+    public:
+        StarBit(std::string spriteFile) : CS230::ParticleEmitter::Particle(spriteFile) {}
+        GameObjectType GetObjectType() { return GameObjectType::Particle; }
+        std::string GetObjectTypeName() { return "Star Bit Emitter"; }
+    };
+    static constexpr int NumParticles = 50;
+};
