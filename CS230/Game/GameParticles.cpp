@@ -36,10 +36,20 @@ MeteorBitEmitter::MeteorBitEmitter() : ParticleEmitter(1.5)
 	}
 }
 
+//CarBitEmitter
 CarBitEmitter::CarBitEmitter() : ParticleEmitter(1.5)
 {
 	for (int i = 0; i < NumParticles; i++)
 	{
 		ParticleEmitter::AddParticle(new CarBit{ "Assets/Final/CarBit.spt" });
+	}
+}
+
+//CarBitEmitter
+StarBitEmitter::StarBitEmitter() : ParticleEmitter(1.5)
+{
+	for (int i = 0; i < NumParticles; i++)
+	{
+		ParticleEmitter::AddParticle(new StarBit{ "Assets/Final/StarBit.spt" });
 	}
 }

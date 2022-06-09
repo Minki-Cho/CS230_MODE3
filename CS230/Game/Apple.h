@@ -7,9 +7,7 @@ Project: CS230
 Author:
 Creation date: 6/7/2022
 -----------------------------------------------------------------*/
-
 #pragma once
-
 #include "..\Engine\GameObject.h" //inheritance
 #include "BumperCar.h"
 
