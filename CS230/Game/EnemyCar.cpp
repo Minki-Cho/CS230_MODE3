@@ -7,16 +7,26 @@
 #include "EnemyCar_Anim.h" //Car Animation
 #include "GameParticles.h"
 
-EnemyCar::EnemyCar(GameObject* player) : player(player), GameObject(math::vec2{}, 0, math::vec2{ 0.75,0.75 })
+EnemyCar::EnemyCar(GameObject* player, math::vec2 position, std::vector<double> moveableNodes, EnemyCarType type) : position(position), GameObject(math::vec2{}, 0,
+	math::vec2{ 0.75,0.75 }), changeDir(false), moveableNodes(moveableNodes), type(type), player(player)
+{
+	AddGOComponent(new CS230::Sprite("Assets/Final/slasher.spt", this));
+	SetPosition(math::vec2{ position });
+	GetGOComponent<CS230::Sprite>()->PlayAnimation(static_cast<int>(EnemyCar_Anim::Rot_Anim));
+}
+
+EnemyCar::EnemyCar(GameObject* player, EnemyCarType type) :player(player), position(math::vec2{}), GameObject(math::vec2{}, 0, math::vec2{ 0.75,0.75 }),
+changeDir(false), type(type)
 {
 	AddGOComponent(new CS230::Sprite("Assets/Final/slasher.spt", this));
 	SetRotation(GetRandom(0, 2 * PI));
-	SetPosition(math::vec2{ GetRandom(player->GetPosition().x + 10, player->GetPosition().x),GetRandom(0, Engine::GetWindow().GetSize().y )});
-	GetGOComponent<CS230::Sprite>()->PlayAnimation(static_cast<int>(EnemyCar_Anim::Rot_Anim));
+	SetPosition({ static_cast<double>(Engine::GetWindow().GetSize().x), static_cast<double>(Engine::GetWindow().GetSize().y + 50.0) });
 }
 
 void EnemyCar::Update(double dt)
 {
+	if (type == EnemyCarType::Chasing)
+	{
 		math::vec2 facingVector = (math::RotateMatrix(GetRotation()) * math::vec2{ 0,1 }).Normalize();
 		math::vec2 playerVector = (player->GetPosition() - GetPosition()).Normalize();
 		if (facingVector.Cross(playerVector) >= 0.05)
@@ -28,9 +38,29 @@ void EnemyCar::Update(double dt)
 			UpdateRotation(-rotationRate * dt);
 		}
 		UpdateVelocity(-(GetVelocity() * drag * dt));
-	UpdateVelocity(math::RotateMatrix(GetRotation()) * math::vec2{ 0,accel * dt });
-	UpdatePosition(GetVelocity() * dt);
-	UpdateGOComponents(dt);
+		UpdateVelocity(math::RotateMatrix(GetRotation()) * math::vec2{ 0,accel * dt });
+		UpdatePosition(GetVelocity() * dt);
+		UpdateGOComponents(dt);
+	}
+
+	if (type == EnemyCarType::UpDown)
+	{
+		UpdatePosition({ speed.x * dt,speed.y * dt });
+		if (GetPosition().x > moveableNodes[0])
+		{
+			changeDir = true;
+		}
+		else if (GetPosition().x < moveableNodes[1])
+		{
+			changeDir = true;
+		}
+		if (changeDir == true)
+		{
+			speed.x = -speed.x;
+			speed.y = -speed.y;
+			changeDir = false;
+		}
+	}
 }
 
 GameObjectType EnemyCar::GetObjectType()
@@ -68,9 +98,4 @@ void EnemyCar::ResolveCollision(GameObject* collidedWith)
 
 		RemoveGOComponent<CS230::Collision>();
 	}
-}
-
-double EnemyCar::GetRandom(double min, double max)
-{
-	return min + rand() / (RAND_MAX / (max - min));
 }

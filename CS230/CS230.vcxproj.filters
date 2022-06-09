@@ -312,6 +312,9 @@
     <ClInclude Include="Game\EnemyCar_Anim.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="Game\EnemyCarType.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Vec2.inl">

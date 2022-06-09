@@ -19,6 +19,7 @@ Creation date: 6/7/2022
 #include "Arena.h" //EnemyShip
 #include "Apple.h"
 #include "EnemyCar.h"
+#include "EnemyCarType.h"
 
 Mode3::Mode3() : gameObjectManagerPtr(nullptr), bumpercarPtr(nullptr),
 #ifdef _DEBUG
@@ -41,7 +42,8 @@ void Mode3::Load()
 	bumpercarPtr = new BumperCar(math::vec2{ Engine::GetWindow().GetSize().x / 2.0, Engine::GetWindow().GetSize().y / 2.0 });
 	gameObjectManagerPtr->Add(bumpercarPtr);
 	gameObjectManagerPtr->Add(new Apple());
-	gameObjectManagerPtr->Add(new EnemyCar(bumpercarPtr));
+	gameObjectManagerPtr->Add(new EnemyCar(bumpercarPtr, { 300,0 }, { 1000, 300 }, EnemyCarType::UpDown));
+	gameObjectManagerPtr->Add(new EnemyCar(bumpercarPtr, EnemyCarType::Chasing));
 	AddGSComponent(gameObjectManagerPtr);
 	AddGSComponent(new Arena{ "Assets/Final/map.png" });
 
