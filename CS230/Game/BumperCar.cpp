@@ -113,6 +113,7 @@ void BumperCar::ResolveCollision(CS230::GameObject* objectB)
 	{
 		isDead = true;
 		GetGOComponent<CS230::Sprite>()->PlayAnimation(static_cast<int>(Car_Anim::Disappear_Anim));
+		RemoveGOComponent<CS230::Collision>();
 		objectB->ResolveCollision(this);
 	}
 }

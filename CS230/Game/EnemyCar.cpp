@@ -85,10 +85,6 @@ void EnemyCar::ResolveCollision(GameObject* collidedWith)
 {
 	if (collidedWith->GetObjectType() == GameObjectType::BumperCar)
 	{
-		//math::vec2 vectorToObject = collidedWith->GetPosition() - GetPosition();
-		//math::vec2 collisionPoint = vectorToObject.Normalize() * GetGOComponent<CS230::CircleCollision>()->GetRadius() + GetPosition();
-		//Engine::GetGameStateManager().GetGSComponent<HitEmitter>()->Emit(1, collisionPoint, GetVelocity(), math::vec2{ 0,0 }, 0);
-
 		math::vec2 vectorToObject = collidedWith->GetPosition() - GetPosition();
 		math::vec2 collisionPoint = vectorToObject.Normalize() * GetGOComponent<CS230::CircleCollision>()->GetRadius() + GetPosition();
 		math::vec2 Velocity = collidedWith->GetVelocity();
