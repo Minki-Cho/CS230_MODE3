@@ -33,7 +33,7 @@ modeNext(CS230::InputKey::Keyboard::Escape), modeReload(CS230::InputKey::Keyboar
 void Mode3::Load()
 {
 	score = 0;
-	timer = 10;
+	timer = 30;
 	AddGSComponent(new Score(score, Fonts::Font1));
 	AddGSComponent(new Timer(timer));
 	std::string gameoverString = "Game Over";
