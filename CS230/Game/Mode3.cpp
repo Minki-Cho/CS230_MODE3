@@ -21,6 +21,7 @@ Creation date: 6/7/2022
 #include "EnemyCar.h"
 #include "EnemyCarType.h"
 #include "Timer.h"
+#include "ScreenShaker.h"
 
 Mode3::Mode3() : gameObjectManagerPtr(nullptr), bumpercarPtr(nullptr),
 #ifdef _DEBUG
@@ -36,6 +37,7 @@ void Mode3::Load()
 	timer = 30;
 	AddGSComponent(new Score(score, Fonts::Font1));
 	AddGSComponent(new Timer(timer));
+	AddGSComponent(new ScreenShake());
 	std::string gameoverString = "Game Over";
 	GameOverTexture = Engine::GetSpriteFont(static_cast<int>(Fonts::Font2)).DrawTextToTexture(gameoverString, 0xFFFFFFFF, true);
 	std::string restartString = "Press r to restart";
@@ -95,8 +97,11 @@ void Mode3::Update(double dt)
 	{
 		Engine::GetGameStateManager().SetNextState(static_cast<int>(Screens::MainMenu));
 	}
-
 	GetGSComponent<CS230::GameObjectManager>()->Update(dt);
+	if (bumpercarPtr->IsDead() == true)
+	{
+		GetGSComponent<ScreenShake>()->Update(dt);
+	}
 }
 
 void Mode3::Draw()

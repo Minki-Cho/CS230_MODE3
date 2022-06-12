@@ -2,14 +2,14 @@
 Copyright (C) 2021 DigiPen Institute of Technology.
 Reproduction or disclosure of this file or its contents without the prior
 written consent of DigiPen Institute of Technology is prohibited.
-File Name:
+File Name: Apple.h
 Project: CS230
-Author:
-Creation date: 6/7/2022
+Author: Minki Cho, Minjae Yu
+Creation date: 6/12/2022
 -----------------------------------------------------------------*/
 #pragma once
 #include "..\Engine\GameObject.h" //inheritance
-#include "BumperCar.h"
+//#include "BumperCar.h"
 
 class Apple : public CS230::GameObject
 {

@@ -136,6 +136,9 @@
     <ClCompile Include="Game\EnemyCar.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Game\ScreenShaker.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Logger.h">
@@ -313,6 +316,12 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Game\EnemyCarType.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\ScreenShaker.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Beep.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>

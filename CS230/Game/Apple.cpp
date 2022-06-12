@@ -1,11 +1,19 @@
+/*--------------------------------------------------------------
+Copyright (C) 2021 DigiPen Institute of Technology.
+Reproduction or disclosure of this file or its contents without the prior
+written consent of DigiPen Institute of Technology is prohibited.
+File Name: Apple.cpp
+Project: CS230
+Author: Minki Cho, Minjae Yu
+Creation date: 6/12/2022
+-----------------------------------------------------------------*/
 #include "Apple.h" //Apple
 #include "GameObjectTypes.h" //return GameObjectTypes
 #include "../Engine/Collision.h" //removeCollision
 #include "Score.h" //Add Score
 #include "../Engine/Engine.h" //GetGameStateManager
-#include "../Engine/GameObjectManager.h"
-#include "GameParticles.h"
-
+#include "../Engine/GameObjectManager.h" // GameObjectManager
+#include "GameParticles.h" // Particle
 Apple::Apple() : GameObject({ 0,0 }), random_val({0,0})
 {
 	random_val = { random_helper(400.0, 1000.0),random_helper(160.0, 760.0) };
@@ -48,6 +56,7 @@ void Apple::ResolveCollision(GameObject* objectB)
 		RemoveGOComponent<CS230::Sprite>();
 		SetDestroyed(true);
 		Engine::GetGSComponent<CS230::GameObjectManager>()->Add(new Apple);
+		
 	}
 }
 
