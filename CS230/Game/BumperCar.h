@@ -26,6 +26,7 @@ public:
     void ResolveCollision(CS230::GameObject* objectB) override;
 
     bool IsDead() { return isDead; }
+    void SetDead(bool dead) { isDead = dead; }
 private:
     double velocity;
     static constexpr double increase_val{ 80 };

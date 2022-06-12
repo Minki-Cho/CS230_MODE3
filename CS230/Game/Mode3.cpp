@@ -20,19 +20,22 @@ Creation date: 6/7/2022
 #include "Apple.h"
 #include "EnemyCar.h"
 #include "EnemyCarType.h"
+#include "Timer.h"
 
 Mode3::Mode3() : gameObjectManagerPtr(nullptr), bumpercarPtr(nullptr),
 #ifdef _DEBUG
-modeNext(CS230::InputKey::Keyboard::Escape), modeReload(CS230::InputKey::Keyboard::R), score(0)
+modeNext(CS230::InputKey::Keyboard::Escape), modeReload(CS230::InputKey::Keyboard::R), score(0), timer(0)
 #else
-modeNext(CS230::InputKey::Keyboard::Escape), modeReload(CS230::InputKey::Keyboard::R)
+modeNext(CS230::InputKey::Keyboard::Escape), modeReload(CS230::InputKey::Keyboard::R), score(0), timer(0)
 #endif
 {}
 
 void Mode3::Load()
 {
 	score = 0;
+	timer = 10;
 	AddGSComponent(new Score(score, Fonts::Font1));
+	AddGSComponent(new Timer(timer));
 	std::string gameoverString = "Game Over";
 	GameOverTexture = Engine::GetSpriteFont(static_cast<int>(Fonts::Font2)).DrawTextToTexture(gameoverString, 0xFFFFFFFF, true);
 	std::string restartString = "Press r to restart";
@@ -60,6 +63,19 @@ void Mode3::Load()
 
 void Mode3::Update(double dt)
 {
+	//Timer
+	if (GetGSComponent<Timer>()->hasEnded() == true)
+	{
+		bumpercarPtr->SetDead(true);
+		if (modeReload.IsKeyReleased())
+		{
+			Engine::GetGameStateManager().ReloadState();
+		}
+	}
+	else
+	{
+		GetGSComponent<Timer>()->Update(dt);
+	}
 #ifdef _DEBUG
 	if (modeReload.IsKeyReleased())
 	{
@@ -67,7 +83,7 @@ void Mode3::Update(double dt)
 	}
 	GetGSComponent<ShowCollision>()->Update(dt);
 #else
-	if (shipPtr->IsDead() == true)
+	if (bumpercarPtr->IsDead() == true)
 	{
 		if (modeReload.IsKeyReleased())
 		{
@@ -92,7 +108,7 @@ void Mode3::Draw()
 
 	math::ivec2 winSize = Engine::GetWindow().GetSize();
 	GetGSComponent<Score>()->Draw(math::ivec2{ 10,  winSize.y - 5 });
-
+	GetGSComponent<Timer>()->Draw(math::ivec2{ winSize.x - 10, winSize.y - 5 });
 	if (bumpercarPtr->IsDead() == true)
 	{
 		GameOverTexture.Draw(math::TranslateMatrix{ math::ivec2{(winSize.x - GameOverTexture.GetSize().x) / 2,winSize.y / 2} });

@@ -39,6 +39,7 @@ private:
 	math::TransformMatrix cameraMatrix;
 
 	int score;
+	int timer;
 	CS230::Texture scoreTexture;
 	CS230::Texture GameOverTexture;
 	CS230::Texture RestartTexture;
